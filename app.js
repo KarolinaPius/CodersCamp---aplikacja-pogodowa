@@ -12,7 +12,7 @@ searchButton.onclick = function () {
                 .then(json => {
                     let data = json;
                     let output = formatResponse(data);
-                    resultWeather.innerHTML = output;
+                    resultWeather.appendChild(output);
                 });
         });
 }
