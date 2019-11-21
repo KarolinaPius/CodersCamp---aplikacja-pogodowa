@@ -1,6 +1,6 @@
-const searchButton = document.getElementById('submit');
-const newCity = document.getElementById('city');
-const resultWeather = document.getElementsByClassName('currentWeather');
+const searchButton = document.querySelector('#submit');
+const newCity = document.querySelector('#city');
+const resultWeather = document.querySelector('.currentWeather');
 const APIKey = "34b55e81e4919626be452ad5a44c606a"
 
 searchButton.onclick = function () {
