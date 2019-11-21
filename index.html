@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">        
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+        <link rel="stylesheet" href="style/style.css" type="text/css" rel="stylesheet"/>
+        <title>Aplikacja pogodowa</title> 
+
+    </head>
+
+    <body>
+        <div class="container">
+            <!--wyszukiwanie miast-->
+            <div class="searchForm">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" id="city" class="form-control" placeholder="wpisz miasto">
+                    <button type="button" id="submit" class="btn btn-info">szukaj</button>
+                </div>
+            </div>
+            <!--karuzela z najbliższymi dniami-->
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="dailyWeather">
+                            <div class="forecast">
+                                <div class="currentWeather">
+                                    <h5>AKTUALNA POGODA</h5>
+                                    <P>godzina</P>
+                                    <p>data</p>
+                                    <img src="" alt="weatherIcon">
+                                </div>
+                                <div class="details">
+                                    <p><div>temperatura</div></p>
+                                    <p>opady</p>
+                                    <p>wiatr</p>
+                                    <p>ciśnienie</p>
+                                    <p>wilgotność</p>
+                                    <p>zachmurzenie</p>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                            <div class="dailyWeather">
+                                <div class="forecast">
+                                    <div class="tomorrowWeather">
+                                        <h5>JUTRO</h5>
+                                        <p>data</p>
+                                        <img src="" alt="weatherIcon">
+                                    </div>
+                                    <div class="details">
+                                        <p>temperatura</p>
+                                        <p>opady</p>
+                                        <p>wiatr</p>
+                                        <p>ciśnienie</p>
+                                        <p>wilgotność</p>
+                                        <p>zachmurzenie</p>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="carousel-item">
+                            <div class="dailyWeather">
+                                <div class="forecast">
+                                    <div class="dayAfterTomorrowWeather">
+                                        <h5>POJUTRZE</h5>
+                                        <p>data</p>
+                                        <img src="" alt="weatherIcon">
+                                    </div>
+                                    <div class="details">
+                                        <p>temperatura</p>
+                                        <p>opady</p>
+                                        <p>wiatr</p>
+                                        <p>ciśnienie</p>
+                                        <p>wilgotność</p>
+                                        <p>zachmurzenie</p>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                      
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+            </div>
+            
+            <!--prognoza godzinowa-->
+            <div class="laterForecast">
+                <div class="col-6 hourly">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>PROGNOZA GODZINOWA:</h5>
+                        </div>
+                    </div>
+                </div>
+                <!--prognoza na 5 dni - proponuję jakiś skrót, bo najbliższe dni będziemy mieć w karuzeli-->
+                <div class="col-6 nextDays">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>KOLEJNE DNI:</h5>
+                                <p>dzień tygodnia: temperatura</p>
+                                
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="./app.js"></script>
+                        
+    </body>
+</html>
