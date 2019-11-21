@@ -12,7 +12,6 @@ const fillWithSearchResult = () => {
                 .then(json => {
                     let data = json;
                     let output = formatResponse(data);
-                    console.log(data)
                     resultWeather.appendChild(output);
                 });
         });
