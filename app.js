@@ -18,11 +18,13 @@ searchButton.onclick = function () {
 }
 
 function formatResponse(data) {
-    let out = `<p>Aktualna pogoda dla ${city.name}:</p><br/>
-    <p>temperatura: ${list[1].main.temp}</p><br/>
-    <p>wiatr: ${list[4]}</p><br/>
-    <p>ciśnienie: ${list[1].main.pressure}</p><br/>
-    <p>wilgotność: ${list[1].main.humidity}</p><br/>
-    <p>zachmurzenie: ${list[3]}</p><br/>`;
-    return out;
+    let weatherDetails = document.createElement('div')
+    let out = `<p>Aktualna pogoda dla ${data.city.name}:</p><br/>
+    <p>temperatura: ${data.list[0].main.temp}</p><br/>
+    <p>wiatr: ${data.list[0].wind.speed}</p><br/>
+    <p>ciśnienie: ${data.list[0].main.pressure}</p><br/>
+    <p>wilgotność: ${data.list[0].main.humidity}</p><br/>
+    <p>zachmurzenie: ${data.list[0].clouds.all}%</p><br/>`;
+    weatherDetails.innerHTML = out
+    return weatherDetails;
 }
