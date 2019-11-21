@@ -17,9 +17,22 @@ searchButton.onclick = function () {
         });
 }
 
+const getCurrentDate = () => {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    return date
+}
+
+const getCurrentTime = () => {
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return time
+}
+
 function formatResponse(data) {
     let weatherDetails = document.createElement('div')
-    let out = `<p>Aktualna pogoda dla ${data.city.name}:</p><br/>
+    let out = `<p>${getCurrentDate()} ${getCurrentTime()}
+    <p>Aktualna pogoda dla ${data.city.name}:</p><br/>
     <p>temperatura: ${data.list[0].main.temp}</p><br/>
     <p>wiatr: ${data.list[0].wind.speed}</p><br/>
     <p>ciśnienie: ${data.list[0].main.pressure}</p><br/>
