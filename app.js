@@ -3,7 +3,7 @@ const newCity = document.querySelector('#city');
 const resultWeather = document.querySelector('.currentWeather');
 const APIKey = "34b55e81e4919626be452ad5a44c606a"
 
-searchButton.onclick = function () {
+const fillWithSearchResult = () => {
     const city = newCity.value;
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
     fetch(url)
@@ -41,3 +41,4 @@ function formatResponse(data) {
     weatherDetails.innerHTML = out
     return weatherDetails;
 }
+searchButton.addEventListener('click', fillWithSearchResult)
