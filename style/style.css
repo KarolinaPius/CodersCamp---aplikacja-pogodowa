@@ -39,3 +39,7 @@ img{
 .laterForecast {
     display: flex;
 }
+
+.input-group.flex-nowrap{
+    margin: 3% auto;
+}
