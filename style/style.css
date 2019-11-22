@@ -1,3 +1,6 @@
+* {
+    color:white;
+}
 .container {
     height: 100vh;
     background: rgb(22,85,117);
@@ -23,7 +26,7 @@
     grid-template-columns: 1fr 1fr;
 }
 
-#currentCityName {
+.cityName {
     font-size: 30px;
     color: white;
     font-weight: 700; 
@@ -63,6 +66,10 @@ img{
 
 .laterForecast {
     display: flex;
+}
+
+.card{
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .input-group.flex-nowrap{

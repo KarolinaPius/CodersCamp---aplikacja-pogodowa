@@ -36,15 +36,15 @@
                             <div class="forecast">
                                 <div class="currentWeather">
                                     <div class="weatherDetails">
-                                        <div id="currentCityName"></div>
+                                        <div class="cityName"></div>
                                         <div id="currentDateAndTime"></div>
                                         <div id="currentTemp"></div>
-                                    <div id="currentWeatherAdditionalInfo">
-                                        <div id= "currentWind"></div>
-                                        <div id= "currentPressure"></div>
-                                        <div id= "currentHumidity"></div>
-                                        <div id= "currentClouds"></div>        
-                                    </div>                                
+                                        <div id="currentWeatherAdditionalInfo">
+                                            <div id= "currentWind"></div>
+                                            <div id= "currentPressure"></div>
+                                            <div id= "currentHumidity"></div>
+                                            <div id= "currentClouds"></div>        
+                                        </div>                                
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,17 @@
                             <div class="dailyWeather">
                                 <div class="forecast">
                                     <div class="tomorrowWeather">
-                                        <div></div>
+                                        <div class="weatherDetails">
+                                                <div class="cityName"></div>
+                                                <div id="tommorowsDate"></div>
+                                                <div id="tommorowsTemp"></div>
+                                            <div id="tommorowsWeatherAdditionalInfo">
+                                                <div id= "tommorowsWind"></div>
+                                                <div id= "tommorowsPressure"></div>
+                                                <div id= "tommorowsHumidity"></div>
+                                                <div id= "tommorowsClouds"></div>        
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -86,6 +96,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5>PROGNOZA GODZINOWA:</h5>
+                            <div class="hourlyForecast">
+                                <div class="hourlyForecastList"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

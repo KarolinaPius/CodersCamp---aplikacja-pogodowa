@@ -1,8 +1,6 @@
 const searchButton = document.querySelector("#submit");
 const newCity = document.querySelector("#city");
 const resultWeather = document.querySelector(".currentWeather");
-
-//nowe selektory do treści do kolejnych slajdów
 const resultWeatherTomorrow = document.querySelector(".tomorrowWeather");
 const resultWeatherDayAfterTommorow = document.querySelector(
   ".dayAfterTomorrowWeather"
@@ -15,19 +13,17 @@ const fillWithCurrentWeatherSearchResult = () => {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
     response.json().then(data => {
-      formatResponse(data);
+      formatCurrentWeather(data);
     });
   });
 };
 
-const fillWithForecastSearchResult = () => {
+const fillWithHourlyForecast = () => {
   const city = newCity.value;
   const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
-    response.json().then(json => {
-      let data = json;
-      let output = formatResponse2(data);
-      resultWeatherTomorrow.replaceChild(output);
+    response.json().then(data => {
+      formatHourlyForecast(data);
     });
   });
 };
@@ -46,8 +42,8 @@ const getCurrentTime = () => {
   return time;
 };
 
-function formatResponse(data) {
-  document.querySelector("#currentCityName").textContent = data.name;
+function formatCurrentWeather(data) {
+  document.querySelector(".cityName").textContent = data.name;
   document.querySelector(
     "#currentDateAndTime"
   ).textContent = `${getCurrentDate()} | ${getCurrentTime()}`;
@@ -71,7 +67,31 @@ function formatResponse(data) {
   ).textContent = `Zachmurzenie: ${data.clouds.all}%`;
 }
 
+const formatHourlyForecast = data => {
+  const hourlyForecastEl = document.querySelector(".hourlyForecast");
+  const hourlyForecastList = document.createElement("ul");
+  hourlyForecastList.style.display = "flex";
+  hourlyForecastList.style.flexWrap = "wrap";
+  hourlyForecastList.style.justifyContent = "center";
+
+  for (let i = 0; i < 5; i++) {
+    let tempDiv = document.createElement("div");
+    let timeDiv = document.createElement("div");
+    tempDiv.style.width = "40%";
+    timeDiv.style.width = "40%";
+    tempDiv.textContent = `${Math.round(data.list[i].main.temp)}°C`;
+    timeDiv.textContent = data.list[i].dt_txt.slice(10);
+    hourlyForecastList.appendChild(tempDiv);
+    hourlyForecastList.appendChild(timeDiv);
+  }
+  hourlyForecastEl.replaceChild(
+    hourlyForecastList,
+    document.querySelector(".hourlyForecastList")
+  );
+};
+
 searchButton.addEventListener("click", fillWithCurrentWeatherSearchResult);
+searchButton.addEventListener("click", fillWithHourlyForecast);
 
 document.getElementById("city").addEventListener("keyup", function(event) {
   event.preventDefault();
