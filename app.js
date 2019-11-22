@@ -24,21 +24,12 @@ const fillWithCurrentWeatherSearchResult = () => {
   });
 };
 
-const fillWithHourlyForecast = () => {
+const fillWithForecastData = () => {
   const city = newCity.value;
   const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
     response.json().then(data => {
       formatHourlyForecast(data);
-    });
-  });
-};
-
-const fillWithDailyForecast = () => {
-  const city = newCity.value;
-  const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
-  fetch(url).then(response => {
-    response.json().then(data => {
       formatDailyForecast(data);
       formatTomorrowsWeather(data);
       formatDayAfterTomorrowsWeather(data);
@@ -224,8 +215,7 @@ const formatDailyForecast = data => {
 };
 
 searchButton.addEventListener("click", fillWithCurrentWeatherSearchResult);
-searchButton.addEventListener("click", fillWithHourlyForecast);
-searchButton.addEventListener("click", fillWithDailyForecast);
+searchButton.addEventListener("click", fillWithForecastData);
 searchButton.addEventListener("click", fillCityName);
 
 document.getElementById("city").addEventListener("keyup", function(event) {
