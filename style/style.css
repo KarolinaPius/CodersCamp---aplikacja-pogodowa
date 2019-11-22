@@ -33,20 +33,20 @@
     align-self: end;
 }
 
-#currentTemp{
+#currentTemp, #tomorrowsTemp, #dayAfterTomorrowsTemp{
     font-size: 50px;
     color: white;
     grid-column-start: 1;
 }
 
-#currentDateAndTime{
+#currentDateAndTime, #tomorrowsDate, #dayAfterTomorrowsDate{
     grid-column-start: 1;
     font-size: 11px;
     color: white;
 
 }
 
-#currentWeatherAdditionalInfo{
+#currentWeatherAdditionalInfo, #tomorrowsWeatherAdditionalInfo, #dayAfterTomorrowsWeatherAdditionalInfo{
     grid-column-start: 2;
     grid-row: 1 / 4;
     display: flex;

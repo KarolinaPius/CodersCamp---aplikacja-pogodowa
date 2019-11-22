@@ -7,6 +7,7 @@ const resultWeatherDayAfterTommorow = document.querySelector(
 );
 
 const APIKey = "34b55e81e4919626be452ad5a44c606a";
+const today = new Date();
 
 const fillWithCurrentWeatherSearchResult = () => {
   const city = newCity.value;
@@ -34,20 +35,20 @@ const fillWithDailyForecast = () => {
   fetch(url).then(response => {
     response.json().then(data => {
       formatDailyForecast(data);
+      formatTomorrowsWeather(data);
+      formatDayAfterTomorrowsWeather(data);
     });
   });
 };
 
 const getCurrentDate = () => {
-  var today = new Date();
-  var date =
+  const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   return date;
 };
 
 const getCurrentTime = () => {
-  var today = new Date();
-  var time =
+  const time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   return time;
 };
@@ -76,6 +77,86 @@ function formatCurrentWeather(data) {
     "#currentClouds"
   ).textContent = `Zachmurzenie: ${data.clouds.all}%`;
 }
+
+const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+
+const formatTomorrowsWeather = data => {
+  const tempList = [];
+  const windList = [];
+  const pressureList = [];
+  const humidityList = [];
+  const cloudsList = [];
+  for (let i = 0; i < 8; i++) {
+    tempList.push(Math.round(data.list[i].main.temp));
+    windList.push(data.list[i].wind.speed);
+    pressureList.push(data.list[i].main.pressure);
+    humidityList.push(data.list[i].main.humidity);
+    cloudsList.push(data.list[i].clouds.all);
+  }
+  document.querySelector("#tomorrowsDate").textContent =
+    today.getFullYear() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
+    (today.getDate() + 1);
+  document.querySelector("#tomorrowsTemp").innerHTML = `${Math.round(
+    arrAvg(tempList)
+  )}°C <img src="http://openweathermap.org/img/w/${
+    data.list[0].weather[0].icon
+  }.png"/>`;
+
+  document.querySelector("#tomorrowsWind").textContent = `Wiatr: ${Math.round(
+    arrAvg(windList)
+  )}km/h`;
+  document.querySelector(
+    "#tomorrowsPressure"
+  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))}hPa`;
+  document.querySelector(
+    "#tomorrowsHumidity"
+  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))}%`;
+  document.querySelector(
+    "#tomorrowsClouds"
+  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))}%`;
+};
+
+const formatDayAfterTomorrowsWeather = data => {
+  const tempList = [];
+  const windList = [];
+  const pressureList = [];
+  const humidityList = [];
+  const cloudsList = [];
+  for (let i = 8; i < 15; i++) {
+    tempList.push(Math.round(data.list[i].main.temp));
+    windList.push(data.list[i].wind.speed);
+    pressureList.push(data.list[i].main.pressure);
+    humidityList.push(data.list[i].main.humidity);
+    cloudsList.push(data.list[i].clouds.all);
+  }
+  document.querySelector("#dayAfterTomorrowsDate").textContent =
+    today.getFullYear() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
+    (today.getDate() + 2);
+  document.querySelector("#dayAfterTomorrowsTemp").innerHTML = `${Math.round(
+    arrAvg(tempList)
+  )}°C <img src="http://openweathermap.org/img/w/${
+    data.list[0].weather[0].icon
+  }.png"/>`;
+
+  document.querySelector(
+    "#dayAfterTomorrowsWind"
+  ).textContent = `Wiatr: ${Math.round(arrAvg(windList))}km/h`;
+  document.querySelector(
+    "#dayAfterTomorrowsPressure"
+  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))}hPa`;
+  document.querySelector(
+    "#dayAfterTomorrowsHumidity"
+  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))}%`;
+  document.querySelector(
+    "#dayAfterTomorrowsClouds"
+  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))}%`;
+};
 
 const formatHourlyForecast = data => {
   const hourlyForecastEl = document.querySelector(".hourlyForecast");
@@ -112,9 +193,7 @@ const formatDailyForecast = data => {
   for (let i = 0; i < data.list.length; i++) {
     dayItemsTempList.push(Math.round(data.list[i].main.temp));
     if (dayItemsTempList.length % 8 === 0) {
-      const average = dayItemsTempList.reduce(
-        (a, b) => a + b / dayItemsTempList.length
-      );
+      const average = arrAvg(dayItemsTempList);
       tempList.push(Math.round(average));
     }
   }
