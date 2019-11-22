@@ -28,6 +28,16 @@ const fillWithHourlyForecast = () => {
   });
 };
 
+const fillWithDailyForecast = () => {
+  const city = newCity.value;
+  const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
+  fetch(url).then(response => {
+    response.json().then(data => {
+      formatDailyForecast(data);
+    });
+  });
+};
+
 const getCurrentDate = () => {
   var today = new Date();
   var date =
@@ -90,8 +100,49 @@ const formatHourlyForecast = data => {
   );
 };
 
+const formatDailyForecast = data => {
+  const dailyForecastEl = document.querySelector(".dailyForecast");
+  const dailyForecastList = document.createElement("ul");
+  dailyForecastList.style.display = "flex";
+  dailyForecastList.style.flexWrap = "wrap";
+  dailyForecastList.style.justifyContent = "center";
+  const day = new Date();
+  let tempList = [];
+  const dayItemsTempList = [];
+  for (let i = 0; i < data.list.length; i++) {
+    dayItemsTempList.push(Math.round(data.list[i].main.temp));
+    if (dayItemsTempList.length % 8 === 0) {
+      const average = dayItemsTempList.reduce(
+        (a, b) => a + b / dayItemsTempList.length
+      );
+      tempList.push(Math.round(average));
+    }
+  }
+  for (let j = 0; j < tempList.length; j++) {
+    let tempDiv = document.createElement("div");
+    let dateDiv = document.createElement("div");
+    tempDiv.style.width = "40%";
+    dateDiv.style.width = "40%";
+    tempDiv.textContent = `${tempList[j]}°C`;
+    dateDiv.textContent =
+      day.getFullYear() +
+      "-" +
+      (day.getMonth() + 1) +
+      "-" +
+      (day.getDate() + 1 + j);
+    dailyForecastList.appendChild(tempDiv);
+    dailyForecastList.appendChild(dateDiv);
+  }
+
+  dailyForecastEl.replaceChild(
+    dailyForecastList,
+    document.querySelector(".dailyForecastList")
+  );
+};
+
 searchButton.addEventListener("click", fillWithCurrentWeatherSearchResult);
 searchButton.addEventListener("click", fillWithHourlyForecast);
+searchButton.addEventListener("click", fillWithDailyForecast);
 
 document.getElementById("city").addEventListener("keyup", function(event) {
   event.preventDefault();
