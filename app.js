@@ -9,6 +9,11 @@ const resultWeatherDayAfterTommorow = document.querySelector(
 const APIKey = "34b55e81e4919626be452ad5a44c606a";
 const today = new Date();
 
+const fillCityName = () => {
+  const cityDivs = document.querySelectorAll(".cityName");
+  [...cityDivs].map(x => (x.textContent = newCity.value));
+};
+
 const fillWithCurrentWeatherSearchResult = () => {
   const city = newCity.value;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
@@ -54,7 +59,6 @@ const getCurrentTime = () => {
 };
 
 function formatCurrentWeather(data) {
-  document.querySelector(".cityName").textContent = data.name;
   document.querySelector(
     "#currentDateAndTime"
   ).textContent = `${getCurrentDate()} | ${getCurrentTime()}`;
@@ -222,6 +226,7 @@ const formatDailyForecast = data => {
 searchButton.addEventListener("click", fillWithCurrentWeatherSearchResult);
 searchButton.addEventListener("click", fillWithHourlyForecast);
 searchButton.addEventListener("click", fillWithDailyForecast);
+searchButton.addEventListener("click", fillCityName);
 
 document.getElementById("city").addEventListener("keyup", function(event) {
   event.preventDefault();
