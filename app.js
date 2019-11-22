@@ -31,8 +31,8 @@ const fillWithForecastData = () => {
     response.json().then(data => {
       formatHourlyForecast(data);
       formatDailyForecast(data);
-      formatTomorrowsWeather(data);
-      formatDayAfterTomorrowsWeather(data);
+      formatNextDaysWeather(data, "tomorrows");
+      formatNextDaysWeather(data, "dayAfterTomorrows");
     });
   });
 };
@@ -75,81 +75,59 @@ function formatCurrentWeather(data) {
 
 const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
 
-const formatTomorrowsWeather = data => {
+const formatNextDaysWeather = (data, day = "tomorrows") => {
   const tempList = [];
   const windList = [];
   const pressureList = [];
   const humidityList = [];
   const cloudsList = [];
-  for (let i = 0; i < 8; i++) {
-    tempList.push(Math.round(data.list[i].main.temp));
-    windList.push(data.list[i].wind.speed);
-    pressureList.push(data.list[i].main.pressure);
-    humidityList.push(data.list[i].main.humidity);
-    cloudsList.push(data.list[i].clouds.all);
+  if (day === "tomorrows") {
+    for (let i = 0; i < 8; i++) {
+      tempList.push(Math.round(data.list[i].main.temp));
+      windList.push(data.list[i].wind.speed);
+      pressureList.push(data.list[i].main.pressure);
+      humidityList.push(data.list[i].main.humidity);
+      cloudsList.push(data.list[i].clouds.all);
+      document.querySelector(`#${day}Date`).textContent =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        (today.getDate() + 1);
+    }
+  } else {
+    for (let i = 8; i < 15; i++) {
+      tempList.push(Math.round(data.list[i].main.temp));
+      windList.push(data.list[i].wind.speed);
+      pressureList.push(data.list[i].main.pressure);
+      humidityList.push(data.list[i].main.humidity);
+      cloudsList.push(data.list[i].clouds.all);
+      document.querySelector(`#${day}Date`).textContent =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        (today.getDate() + 2);
+    }
   }
-  document.querySelector("#tomorrowsDate").textContent =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    (today.getDate() + 1);
-  document.querySelector("#tomorrowsTemp").innerHTML = `${Math.round(
+
+  document.querySelector(`#${day}Temp`).innerHTML = `${Math.round(
     arrAvg(tempList)
   )}°C <img src="http://openweathermap.org/img/w/${
     data.list[0].weather[0].icon
   }.png"/>`;
 
-  document.querySelector("#tomorrowsWind").textContent = `Wiatr: ${Math.round(
+  document.querySelector(`#${day}Wind`).textContent = `Wiatr: ${Math.round(
     arrAvg(windList)
   )}km/h`;
   document.querySelector(
-    "#tomorrowsPressure"
+    `#${day}Pressure`
   ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))}hPa`;
   document.querySelector(
-    "#tomorrowsHumidity"
+    `#${day}Humidity`
   ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))}%`;
   document.querySelector(
-    "#tomorrowsClouds"
-  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))}%`;
-};
-
-const formatDayAfterTomorrowsWeather = data => {
-  const tempList = [];
-  const windList = [];
-  const pressureList = [];
-  const humidityList = [];
-  const cloudsList = [];
-  for (let i = 8; i < 15; i++) {
-    tempList.push(Math.round(data.list[i].main.temp));
-    windList.push(data.list[i].wind.speed);
-    pressureList.push(data.list[i].main.pressure);
-    humidityList.push(data.list[i].main.humidity);
-    cloudsList.push(data.list[i].clouds.all);
-  }
-  document.querySelector("#dayAfterTomorrowsDate").textContent =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    (today.getDate() + 2);
-  document.querySelector("#dayAfterTomorrowsTemp").innerHTML = `${Math.round(
-    arrAvg(tempList)
-  )}°C <img src="http://openweathermap.org/img/w/${
-    data.list[0].weather[0].icon
-  }.png"/>`;
-
-  document.querySelector(
-    "#dayAfterTomorrowsWind"
-  ).textContent = `Wiatr: ${Math.round(arrAvg(windList))}km/h`;
-  document.querySelector(
-    "#dayAfterTomorrowsPressure"
-  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))}hPa`;
-  document.querySelector(
-    "#dayAfterTomorrowsHumidity"
-  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))}%`;
-  document.querySelector(
-    "#dayAfterTomorrowsClouds"
+    `#${day}Clouds`
   ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))}%`;
 };
 
