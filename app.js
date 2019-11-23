@@ -26,7 +26,7 @@ const fillWithCurrentWeatherSearchResult = () => {
 
 const fillWithForecastData = () => {
   const city = newCity.value;
-  const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
     response.json().then(data => {
       formatHourlyForecast(data);
