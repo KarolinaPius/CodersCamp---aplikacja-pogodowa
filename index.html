@@ -35,7 +35,17 @@
                         <div class="dailyWeather">
                             <div class="forecast">
                                 <div class="currentWeather">
-                                    <div class="weatherDetails"></div>
+                                    <div class="weatherDetails">
+                                        <div class="cityName"></div>
+                                        <div id="currentDateAndTime"></div>
+                                        <div id="currentTemp"></div>
+                                        <div id="currentWeatherAdditionalInfo">
+                                            <div id= "currentWind"></div>
+                                            <div id= "currentPressure"></div>
+                                            <div id= "currentHumidity"></div>
+                                            <div id= "currentClouds"></div>        
+                                        </div>                                
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +54,17 @@
                             <div class="dailyWeather">
                                 <div class="forecast">
                                     <div class="tomorrowWeather">
-                                        <div></div>
+                                        <div class="weatherDetails">
+                                                <div class="cityName"></div>
+                                                <div id="tomorrowsDate"></div>
+                                                <div id="tomorrowsTemp"></div>
+                                            <div id="tomorrowsWeatherAdditionalInfo">
+                                                <div id= "tomorrowsWind"></div>
+                                                <div id= "tomorrowsPressure"></div>
+                                                <div id= "tomorrowsHumidity"></div>
+                                                <div id= "tomorrowsClouds"></div>        
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +73,17 @@
                             <div class="dailyWeather">
                                 <div class="forecast">
                                     <div class="dayAfterTomorrowWeather">
-                                        <div></div>
+                                        <div class="weatherDetails">
+                                                <div class="cityName"></div>
+                                                <div id="dayAfterTomorrowsDate"></div>
+                                                <div id="dayAfterTomorrowsTemp"></div>
+                                            <div id="dayAfterTomorrowsWeatherAdditionalInfo">
+                                                <div id= "dayAfterTomorrowsWind"></div>
+                                                <div id= "dayAfterTomorrowsPressure"></div>
+                                                <div id= "dayAfterTomorrowsHumidity"></div>
+                                                <div id= "dayAfterTomorrowsClouds"></div>        
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,6 +106,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5>PROGNOZA GODZINOWA:</h5>
+                            <div class="hourlyForecast">
+                                <div class="hourlyForecastList"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +117,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5>KOLEJNE DNI:</h5>
-
+                            <div class="dailyForecast">
+                                <div class="dailyForecastList"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
