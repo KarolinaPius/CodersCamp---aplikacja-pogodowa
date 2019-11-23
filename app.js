@@ -55,7 +55,7 @@ function formatCurrentWeather(data) {
   ).textContent = `${getCurrentDate()} | ${getCurrentTime()}`;
   document.querySelector("#currentTemp").innerHTML = `${Math.round(
     data.main.temp
-  )}°C <img src="http://openweathermap.org/img/w/${
+  )}°C <img src="https://openweathermap.org/img/w/${
     data.weather[0].icon
   }.png"/>`;
 
@@ -113,7 +113,7 @@ const formatNextDaysWeather = (data, day = "tomorrows") => {
 
   document.querySelector(`#${day}Temp`).innerHTML = `${Math.round(
     arrAvg(tempList)
-  )}°C <img src="http://openweathermap.org/img/w/${
+  )}°C <img src="https://openweathermap.org/img/w/${
     data.list[0].weather[0].icon
   }.png"/>`;
 
