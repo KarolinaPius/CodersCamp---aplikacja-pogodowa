@@ -148,6 +148,7 @@ const formatHourlyForecast = data => {
     hourlyForecastList.appendChild(tempDiv);
     hourlyForecastList.appendChild(timeDiv);
   }
+  hourlyForecastList.classList.add("hourlyForecastList");
   hourlyForecastEl.replaceChild(
     hourlyForecastList,
     document.querySelector(".hourlyForecastList")
@@ -185,7 +186,7 @@ const formatDailyForecast = data => {
     dailyForecastList.appendChild(tempDiv);
     dailyForecastList.appendChild(dateDiv);
   }
-
+  dailyForecastList.classList.add("dailyForecastList");
   dailyForecastEl.replaceChild(
     dailyForecastList,
     document.querySelector(".dailyForecastList")
