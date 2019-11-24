@@ -18,10 +18,16 @@ const fillWithCurrentWeatherSearchResult = () => {
   const city = newCity.value;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
+
+    if (response.status !== 200) {
+      alert("Nie mamy w bazie tego miasta. Wpisz inne.")
+      throw new Error("Not 200 response")
+  } else {
     response.json().then(data => {
       formatCurrentWeather(data);
     });
-  });
+  }
+});
 };
 
 const fillWithForecastData = () => {
@@ -61,16 +67,16 @@ function formatCurrentWeather(data) {
 
   document.querySelector(
     "#currentWind"
-  ).textContent = `Wiatr: ${data.wind.speed}km/h`;
+  ).textContent = `Wiatr: ${data.wind.speed} km/h`;
   document.querySelector(
     "#currentPressure"
-  ).textContent = `Ciśnienie: ${data.main.pressure}hPa`;
+  ).textContent = `Ciśnienie: ${data.main.pressure} hPa`;
   document.querySelector(
     "#currentHumidity"
-  ).textContent = `Wilgotność: ${data.main.humidity}%`;
+  ).textContent = `Wilgotność: ${data.main.humidity} %`;
   document.querySelector(
     "#currentClouds"
-  ).textContent = `Zachmurzenie: ${data.clouds.all}%`;
+  ).textContent = `Zachmurzenie: ${data.clouds.all} %`;
 }
 
 const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
@@ -119,16 +125,16 @@ const formatNextDaysWeather = (data, day = "tomorrows") => {
 
   document.querySelector(`#${day}Wind`).textContent = `Wiatr: ${Math.round(
     arrAvg(windList)
-  )}km/h`;
+  )} km/h`;
   document.querySelector(
     `#${day}Pressure`
-  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))}hPa`;
+  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))} hPa`;
   document.querySelector(
     `#${day}Humidity`
-  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))}%`;
+  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))} %`;
   document.querySelector(
     `#${day}Clouds`
-  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))}%`;
+  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))} %`;
 };
 
 const formatHourlyForecast = data => {

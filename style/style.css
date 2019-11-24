@@ -10,18 +10,19 @@
 }
 
 .searchForm {
-    padding: 20px;
+    padding: 1px 50px;
 }
 
+
 .dailyWeather {
-    margin: 0 40px 50px 50px;
-    padding: 30px 70px;
+    margin: 0 50px 50px 50px;
+    padding: 1px 30px;
     height: 350px;
     background:rgba(173, 216, 230, 0.5)
 }
 
 .weatherDetails {
-    height: 350px;
+    height: 300px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -31,19 +32,21 @@
     color: white;
     font-weight: 700; 
     align-self: end;
+    justify-self: center;
 }
 
 #currentTemp, #tomorrowsTemp, #dayAfterTomorrowsTemp{
     font-size: 50px;
     color: white;
     grid-column-start: 1;
+    justify-self: center;
 }
 
 #currentDateAndTime, #tomorrowsDate, #dayAfterTomorrowsDate{
     grid-column-start: 1;
     font-size: 11px;
     color: white;
-
+    justify-self: center;
 }
 
 #currentWeatherAdditionalInfo, #tomorrowsWeatherAdditionalInfo, #dayAfterTomorrowsWeatherAdditionalInfo{
@@ -52,7 +55,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: flex-end;
+    justify-self: center;
 }
 
 #currentWeatherAdditionalInfo div{
@@ -66,6 +69,7 @@ img{
 
 .laterForecast {
     display: flex;
+    margin: 0 40px;
 }
 
 .card{
@@ -73,5 +77,16 @@ img{
 }
 
 .input-group.flex-nowrap{
-    margin: 3% auto;
+    margin: 2% 0;
+}
+
+h5 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.hourlyForecastList, .dailyForecastList {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
 }
