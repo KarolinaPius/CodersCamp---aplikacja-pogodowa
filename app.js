@@ -49,8 +49,7 @@ const getCurrentDate = () => {
 };
 
 const getCurrentTime = () => {
-  const time =
-    today.getHours() + ":" + today.getMinutes();
+  const time = today.getHours() + ":" + today.getMinutes();
   return time;
 };
 
@@ -60,22 +59,22 @@ function formatCurrentWeather(data) {
   ).textContent = `${getCurrentDate()} | ${getCurrentTime()}`;
   document.querySelector("#currentTemp").innerHTML = `${Math.round(
     data.main.temp
-  )}°C <img src="https://openweathermap.org/img/w/${
+  )}°C<img src="https://openweathermap.org/img/w/${
     data.weather[0].icon
   }.png"/>`;
 
   document.querySelector(
     "#currentWind"
-  ).textContent = `Wiatr: ${data.wind.speed} km/h`;
+  ).innerHTML = `Wiatr: </br> ${data.wind.speed} km/h`;
   document.querySelector(
     "#currentPressure"
-  ).textContent = `Ciśnienie: ${data.main.pressure} hPa`;
+  ).innerHTML = `Ciśnienie: </br> ${data.main.pressure} hPa`;
   document.querySelector(
     "#currentHumidity"
-  ).textContent = `Wilgotność: ${data.main.humidity} %`;
+  ).innerHTML = `Wilgotność: </br>${data.main.humidity} %`;
   document.querySelector(
     "#currentClouds"
-  ).textContent = `Zachmurzenie: ${data.clouds.all} %`;
+  ).innerHTML = `Zachmurzenie: </br> ${data.clouds.all} %`;
 }
 
 const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
@@ -118,22 +117,22 @@ const formatNextDaysWeather = (data, day = "tomorrows") => {
 
   document.querySelector(`#${day}Temp`).innerHTML = `${Math.round(
     arrAvg(tempList)
-  )}°C <img src="https://openweathermap.org/img/w/${
+  )}°C<img src="https://openweathermap.org/img/w/${
     data.list[0].weather[0].icon
   }.png"/>`;
 
-  document.querySelector(`#${day}Wind`).textContent = `Wiatr: ${Math.round(
+  document.querySelector(`#${day}Wind`).innerHTML = `Wiatr: <br/> ${Math.round(
     arrAvg(windList)
   )} km/h`;
   document.querySelector(
     `#${day}Pressure`
-  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))} hPa`;
+  ).innerHTML = `Ciśnienie: <br/> ${Math.round(arrAvg(pressureList))} hPa`;
   document.querySelector(
     `#${day}Humidity`
-  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))} %`;
+  ).innerHTML = `Wilgotność: <br/> ${Math.round(arrAvg(humidityList))} %`;
   document.querySelector(
     `#${day}Clouds`
-  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))} %`;
+  ).innerHTML = `Zachmurzenie: <br/> ${Math.round(arrAvg(cloudsList))} %`;
 };
 
 const formatHourlyForecast = data => {
