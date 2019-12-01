@@ -18,16 +18,15 @@ const fillWithCurrentWeatherSearchResult = () => {
   const city = newCity.value;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
-
     if (response.status !== 200) {
-      alert("Nie mamy w bazie tego miasta. Wpisz inne.")
-      throw new Error("Not 200 response")
-  } else {
-    response.json().then(data => {
-      formatCurrentWeather(data);
-    });
-  }
-});
+      alert("Nie mamy w bazie tego miasta. Wpisz inne.");
+      throw new Error("Not 200 response");
+    } else {
+      response.json().then(data => {
+        formatCurrentWeather(data);
+      });
+    }
+  });
 };
 
 const fillWithForecastData = () => {
@@ -51,7 +50,7 @@ const getCurrentDate = () => {
 
 const getCurrentTime = () => {
   const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    today.getHours() + ":" + today.getMinutes();
   return time;
 };
 
@@ -150,7 +149,7 @@ const formatHourlyForecast = data => {
     tempDiv.style.width = "40%";
     timeDiv.style.width = "40%";
     tempDiv.textContent = `${Math.round(data.list[i].main.temp)}°C`;
-    timeDiv.textContent = data.list[i].dt_txt.slice(10);
+    timeDiv.textContent = data.list[i].dt_txt.slice(10).slice(0, 6);
     hourlyForecastList.appendChild(tempDiv);
     hourlyForecastList.appendChild(timeDiv);
   }
@@ -183,12 +182,7 @@ const formatDailyForecast = data => {
     tempDiv.style.width = "40%";
     dateDiv.style.width = "40%";
     tempDiv.textContent = `${tempList[j]}°C`;
-    dateDiv.textContent =
-      day.getFullYear() +
-      "-" +
-      (day.getMonth() + 1) +
-      "-" +
-      (day.getDate() + 1 + j);
+    dateDiv.textContent = day.getDate() + 1 + j + "-" + (day.getMonth() + 1);
     dailyForecastList.appendChild(tempDiv);
     dailyForecastList.appendChild(dateDiv);
   }
