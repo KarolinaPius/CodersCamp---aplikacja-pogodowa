@@ -90,3 +90,37 @@ h5 {
     padding: 10px;
     text-align: center;
 }
+
+  @media screen and (max-width: 800px){
+    .cityName {
+        font-size: 25px;
+      }
+    #currentTemp, #tomorrowsTemp, #dayAfterTomorrowsTemp {
+        font-size: 30px;
+      }
+    #currentWeatherAdditionalInfo, #tomorrowsWeatherAdditionalInfo, #dayAfterTomorrowsWeatherAdditionalInfo {
+        font-size: 12px;
+      }
+    .searchForm{
+        padding: 1px 5px;
+    }
+    .dailyWeather{
+        margin: 10px auto;
+    }
+    .laterForecast{
+        margin: 0 auto;
+    }
+    .card-body h5 {
+        font-size: 12px;
+      }
+    .card-body{
+          padding: 1.25rem 0;
+      }
+    .hourlyForecastList *, .dailyForecastList * {
+        font-size: 10px;
+      }
+    .hourlyForecastList, .dailyForecastList {
+        justify-content: space-between;
+        margin: 0 0;
+      }
+}

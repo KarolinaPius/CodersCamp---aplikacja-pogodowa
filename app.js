@@ -18,16 +18,15 @@ const fillWithCurrentWeatherSearchResult = () => {
   const city = newCity.value;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
   fetch(url).then(response => {
-
     if (response.status !== 200) {
-      alert("Nie mamy w bazie tego miasta. Wpisz inne.")
-      throw new Error("Not 200 response")
-  } else {
-    response.json().then(data => {
-      formatCurrentWeather(data);
-    });
-  }
-});
+      alert("Nie mamy w bazie tego miasta. Wpisz inne.");
+      throw new Error("Not 200 response");
+    } else {
+      response.json().then(data => {
+        formatCurrentWeather(data);
+      });
+    }
+  });
 };
 
 const fillWithForecastData = () => {
@@ -50,8 +49,7 @@ const getCurrentDate = () => {
 };
 
 const getCurrentTime = () => {
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time = today.getHours() + ":" + today.getMinutes();
   return time;
 };
 
@@ -61,22 +59,22 @@ function formatCurrentWeather(data) {
   ).textContent = `${getCurrentDate()} | ${getCurrentTime()}`;
   document.querySelector("#currentTemp").innerHTML = `${Math.round(
     data.main.temp
-  )}°C <img src="https://openweathermap.org/img/w/${
+  )}°C<img src="https://openweathermap.org/img/w/${
     data.weather[0].icon
   }.png"/>`;
 
   document.querySelector(
     "#currentWind"
-  ).textContent = `Wiatr: ${data.wind.speed} km/h`;
+  ).innerHTML = `Wiatr: </br> ${data.wind.speed} km/h`;
   document.querySelector(
     "#currentPressure"
-  ).textContent = `Ciśnienie: ${data.main.pressure} hPa`;
+  ).innerHTML = `Ciśnienie: </br> ${data.main.pressure} hPa`;
   document.querySelector(
     "#currentHumidity"
-  ).textContent = `Wilgotność: ${data.main.humidity} %`;
+  ).innerHTML = `Wilgotność: </br>${data.main.humidity} %`;
   document.querySelector(
     "#currentClouds"
-  ).textContent = `Zachmurzenie: ${data.clouds.all} %`;
+  ).innerHTML = `Zachmurzenie: </br> ${data.clouds.all} %`;
 }
 
 const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
@@ -119,22 +117,22 @@ const formatNextDaysWeather = (data, day = "tomorrows") => {
 
   document.querySelector(`#${day}Temp`).innerHTML = `${Math.round(
     arrAvg(tempList)
-  )}°C <img src="https://openweathermap.org/img/w/${
+  )}°C<img src="https://openweathermap.org/img/w/${
     data.list[0].weather[0].icon
   }.png"/>`;
 
-  document.querySelector(`#${day}Wind`).textContent = `Wiatr: ${Math.round(
+  document.querySelector(`#${day}Wind`).innerHTML = `Wiatr: <br/> ${Math.round(
     arrAvg(windList)
   )} km/h`;
   document.querySelector(
     `#${day}Pressure`
-  ).textContent = `Ciśnienie: ${Math.round(arrAvg(pressureList))} hPa`;
+  ).innerHTML = `Ciśnienie: <br/> ${Math.round(arrAvg(pressureList))} hPa`;
   document.querySelector(
     `#${day}Humidity`
-  ).textContent = `Wilgotność: ${Math.round(arrAvg(humidityList))} %`;
+  ).innerHTML = `Wilgotność: <br/> ${Math.round(arrAvg(humidityList))} %`;
   document.querySelector(
     `#${day}Clouds`
-  ).textContent = `Zachmurzenie: ${Math.round(arrAvg(cloudsList))} %`;
+  ).innerHTML = `Zachmurzenie: <br/> ${Math.round(arrAvg(cloudsList))} %`;
 };
 
 const formatHourlyForecast = data => {
@@ -150,7 +148,7 @@ const formatHourlyForecast = data => {
     tempDiv.style.width = "40%";
     timeDiv.style.width = "40%";
     tempDiv.textContent = `${Math.round(data.list[i].main.temp)}°C`;
-    timeDiv.textContent = data.list[i].dt_txt.slice(10);
+    timeDiv.textContent = data.list[i].dt_txt.slice(10).slice(0, 6);
     hourlyForecastList.appendChild(tempDiv);
     hourlyForecastList.appendChild(timeDiv);
   }
@@ -183,12 +181,7 @@ const formatDailyForecast = data => {
     tempDiv.style.width = "40%";
     dateDiv.style.width = "40%";
     tempDiv.textContent = `${tempList[j]}°C`;
-    dateDiv.textContent =
-      day.getFullYear() +
-      "-" +
-      (day.getMonth() + 1) +
-      "-" +
-      (day.getDate() + 1 + j);
+    dateDiv.textContent = day.getDate() + 1 + j + "-" + (day.getMonth() + 1);
     dailyForecastList.appendChild(tempDiv);
     dailyForecastList.appendChild(dateDiv);
   }
